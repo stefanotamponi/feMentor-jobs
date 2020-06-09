@@ -1,3 +1,5 @@
-let mainContent = "<h1>Hello World!</h1>"
+import "../styles/styles.css";
 
-document.getElementById("root").insertAdjacentHTML("beforeend", mainContent);
+// Accept hot modules (CSS Injection)
+if (module.hot) module.hot.accept()
+
