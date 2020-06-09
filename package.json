@@ -1,0 +1,22 @@
+{
+  "name": "newsandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sandbox",
+    "js",
+    "webpack"
+  ],
+  "author": "Stefano Tamponi",
+  "license": "ISC"
+}
