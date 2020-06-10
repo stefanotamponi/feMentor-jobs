@@ -3,6 +3,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const fse = require('fs-extra');
 
 postCSSPlugins = [
   require('postcss-import'),
@@ -12,6 +13,14 @@ postCSSPlugins = [
   require('postcss-hexrgba'),
   require('autoprefixer')
 ]
+
+class RunAfterCompile {
+  apply(compiler) {
+    compiler.hooks.done.tap('Copy images', () => {
+      fse.copySync('./app/assets/images', './dist/assets/images');
+    })
+  }
+}
 
 let cssConfig = {
   test: /\.css$/i,
@@ -23,9 +32,16 @@ let cssConfig = {
   }],
 }
 
+let pages = fse.readdirSync('./app').filter(file => file.endsWith('.html')).map(page => {
+  return new HTMLWebpackPlugin({
+    filename: page,
+    template: `./app/${page}`
+  })
+})
+
 let config = {
   entry: './app/assets/scripts/App.js',
-  plugins: [new HTMLWebpackPlugin({filename: 'index.html', template: './app/index.html'})],
+  plugins: pages,
   module: {
     rules: [
       cssConfig
@@ -53,6 +69,17 @@ if (currentMode == 'dev') {
 
 
 if (currentMode == 'build') {
+  config.module.rules.push({
+    test: /\.js$/,
+    exclude: /(node_modules)/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env']
+      }
+    }
+  })
+
   cssConfig.use.unshift(MiniCSSExtractPlugin.loader);
   postCSSPlugins.push(require('cssnano'));
 
@@ -65,7 +92,11 @@ if (currentMode == 'build') {
   config.optimization = {
     splitChunks: {chunks: 'all'}
   },
-  config.plugins.push(new CleanWebpackPlugin(), new MiniCSSExtractPlugin({filename: 'styles.[chunkhash].css'}))
+  config.plugins.push(
+    new CleanWebpackPlugin(),
+    new MiniCSSExtractPlugin({filename: 'styles.[chunkhash].css'}),
+    new RunAfterCompile()
+  )
 }
 
 module.exports = config;
