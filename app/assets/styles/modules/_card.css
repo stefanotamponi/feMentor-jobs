@@ -6,6 +6,23 @@
   margin-bottom: 40px;
   padding: 35px 25px 25px 25px;
   positioN: relative;
+  transition: all 300ms ease-out;
+
+  &--small {
+    align-items: center;
+    border: none;
+    display: flex;
+    margin: 20px;
+    padding: 20px;
+    justify-content: space-between;
+    aside {
+      color: $darkGrayishCyan;
+      display: block;
+      text-align: center;
+      width: 30%;
+      font-weight: bold;
+    }
+  }
 
   &__image {
     height: 50px;

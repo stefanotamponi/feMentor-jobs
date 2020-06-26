@@ -29,4 +29,9 @@ body {
 #root {
   background-color: $backgroundColor;
   padding: 50px 25px;
+  position: relative;
+}
+
+.main-content {
+  transition: all 300ms ease-out; 
 }

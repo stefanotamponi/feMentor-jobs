@@ -9,4 +9,32 @@
     background-color: $mainColor;
     color: #FFF;
   }
+
+  &--filter {
+    position: relative;
+    border-radius: 5px 0 0 5px;
+    margin-right: 47px!important;
+
+    &::before {
+      content: "";
+      background: $mainColor;
+      position: absolute;
+      height: 100%;
+      right: 0;
+      top: 0;
+      width: 32px;
+      border-radius: 0 5px 5px 0;
+      transform: translateX(100%);
+    }
+
+    &::after {
+      content: "+";
+      position: absolute;
+      color: #FFF;
+      font-size: 1.5em;
+      right: -14px;
+      transform: translate(50%, -50%) rotate(45deg);
+      top: 50%;
+    }
+  }
 }
