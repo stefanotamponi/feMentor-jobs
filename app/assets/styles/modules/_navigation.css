@@ -5,7 +5,7 @@
   position: absolute;
   transition: clip-path 500ms ease-out, opacity 150ms ease-out;
   transform: translateY(-50%);
-  top: 0;
+  top: -20px;
   opacity: 0;
   left: 10px;
   width: calc(100% - 95px);
@@ -24,8 +24,5 @@
       opacity: 1;
     }
 
-    & + .main-content {
-      margin-top: 75px;
-    }
   }
 }

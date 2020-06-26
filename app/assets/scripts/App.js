@@ -19,8 +19,11 @@ class App {
   toggleNavigation() {
     if (this.navigation.classList.contains("navigation--visible")) {
       this.navigation.classList.remove("navigation--visible")
+      this.mainContent.style.marginTop = 0;
     } else {
       this.navigation.classList.add("navigation--visible");
+      this.mainContent.style.marginTop = Math.trunc(this.navigation.clientHeight / 2) + "px";
+
     }
   }
 
