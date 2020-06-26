@@ -1,4 +1,32 @@
+html, body {
+  overflow-x: hidden;
+}
+
 body {
-  color: $safeBlack;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Spartan", Helvetica, sans-serif;
+  font-size: 15px;
+  position: relative; 
+}
+
+.attribution {
+  background-color: $mainColor;
+  bottom: 0;
+  color: #FFF;
+  padding: 1em;
+  position: absolute;
+  width: 100%;
+  a {
+    color: $backgroundColor;
+  }
+}
+
+.hero {
+  background: $mainColor url("../../../assets/images/bg-header-mobile.svg") no-repeat center;
+  background-size: cover;
+  height: 150px;
+}
+
+#root {
+  background-color: $backgroundColor;
+  padding: 50px 25px;
 }

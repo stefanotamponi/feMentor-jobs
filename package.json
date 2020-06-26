@@ -1,5 +1,5 @@
 {
-  "name": "newsandbox",
+  "name": "fe-mentor-jobs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -35,10 +35,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "sandbox",
+    "exercise",
+    "html",
+    "css",
     "js",
     "webpack"
   ],
-  "author": "Stefano Tamponi",
+  "author": "Stefano",
   "license": "ISC"
 }

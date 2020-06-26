@@ -1,1 +1,6 @@
-$safeBlack: rgba(0, 0, 0, .86);
+$mainColor: hsl(180, 29%, 50%);
+
+$backgroundColor: hsl(180, 52%, 96%);
+$filterColor: hsl(180, 31%, 95%);
+$darkGrayishCyan: hsl(180, 8%, 52%);
+$veryDarkGrayishCyan: hsl(180, 14%, 20%);

@@ -1,0 +1,5 @@
+.tile {
+  background-color: $backgroundColor;
+  color: $mainColor;
+  padding: 10px;
+}
