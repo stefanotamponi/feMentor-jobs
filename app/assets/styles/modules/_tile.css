@@ -1,5 +1,12 @@
 .tile {
   background-color: $backgroundColor;
+  border-radius: 5px;
   color: $mainColor;
+  cursor: pointer;
   padding: 10px;
+  transition: all 150ms ease-out;
+  &:hover {
+    background-color: $mainColor;
+    color: #FFF;
+  }
 }
