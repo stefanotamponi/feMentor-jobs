@@ -1,6 +1,10 @@
-const card = props => (
-  `<div class="card">
-    <img class="card__image" src="./assets${props.logo.substr(1)}" />
+import Tile from './tile';
+
+const card = (props, tileAction) => {
+  let main = document.createElement("div");
+  main.setAttribute("class", "card");
+  main.innerHTML = `
+  <img class="card__image" src="./assets${props.logo.substr(1)}" />
     <div class="card__main">
       <div class="card__meta-main">
         <small>${props.company}</small>
@@ -11,13 +15,17 @@ const card = props => (
       <span class="card__meta">${props.postedAt} • ${props.contract} • ${props.location}</span>
     </div>
     <hr />
-    <div class="card__tags">
-      <span class="tile">${props.role}</span>
-      <span class="tile">${props.level}</span>
-      ${props.languages.map( l => `<span class='tile'>${l}</span>`).join("")}
-      ${props.tools.map(t => `<span class="tile">${t}</span>`).join("")}
-    </div>
-  </div>`
-)
+  `
+  let tagSection = document.createElement("div"),
+  tags = [props.role, props.level, ...props.languages, ...props.tools]
+
+  tagSection.setAttribute("class", "card__tags");
+  tags.forEach(tag => {
+    tagSection.insertAdjacentElement("beforeend", Tile(tag, tileAction))
+  });
+  main.insertAdjacentElement("beforeend", tagSection);
+
+  return main;
+}
 
 export default card;

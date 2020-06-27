@@ -1,6 +1,7 @@
 import * as data from '../../../data.json';
 import Card from "./modules/card";
 import "../styles/styles.css";
+import Tile from './modules/tile';
 
 class App {
   constructor() {
@@ -8,43 +9,68 @@ class App {
     this.data = data.default;
     this.mainContent = document.createElement("div");
     this.navigation = document.createElement("div");
+    this.filter = [];
     this.mount();
-    this.test();
+
   }
 
-  test() {
-    document.documentElement.addEventListener("click", this.toggleNavigation.bind(this));
+  openNavigation() {
+    if (!this.navigation.classList.contains("navigation--visible")) {
+      this.navigation.classList.add("navigation--visible");
+    } 
+    this.mainContent.style.marginTop = Math.trunc(this.navigation.clientHeight / 2) + "px";
   }
 
-  toggleNavigation() {
+  closeNavigation() {
     if (this.navigation.classList.contains("navigation--visible")) {
       this.navigation.classList.remove("navigation--visible")
-      this.mainContent.style.marginTop = 0;
-    } else {
-      this.navigation.classList.add("navigation--visible");
-      this.mainContent.style.marginTop = Math.trunc(this.navigation.clientHeight / 2) + "px";
-
     }
+    this.mainContent.style.marginTop = 0;
   }
 
   mount() {
     let navContent = `
-      <div class="main card__tags">
-        <span class="tile tile--filter">Frontend</span>
-        <span class="tile tile--filter">CSS</span>
-        <span class="tile tile--filter">JavaScript</span>
-      </div>
       <aside>
         Clear
       </aside>
     `
     this.navigation.setAttribute("class", "navigation card card--small")
     this.navigation.setAttribute("id", "navigation");
+    let navTags = document.createElement("div");
+    navTags.setAttribute("class", "card__tags");
+    this.filter.forEach(el => navTags.insertAdjacentElement("beforeend", Tile(el, this.removeFilter.bind(this), true)));
+
     this.mainContent.setAttribute("class", "main-content");
     this.app.appendChild(this.navigation);
     this.app.appendChild(this.mainContent);
+    this.navigation.insertAdjacentElement("afterbegin", navTags);
     this.navigation.insertAdjacentHTML("beforeend", navContent);
-    this.mainContent.insertAdjacentHTML("beforeend", this.data.map(job => Card(job)).join(""))
+    this.data.map(job => this.mainContent.insertAdjacentElement("beforeend", Card(job, this.addFilter.bind(this))));
+  }
+
+  refreshNavigation() {
+    let tags = this.navigation.getElementsByTagName("div")[0];
+    tags.innerHTML = "";
+    this.filter.forEach(el => tags.insertAdjacentElement("beforeend", Tile(el, this.removeFilter.bind(this), true)));
+    this.mainContent.style.marginTop = Math.trunc(this.navigation.clientHeight / 2) + "px";
+  }
+
+  addFilter(e) {
+    const tag = e.target.innerHTML;
+    if (!this.filter.includes(tag)) this.filter.push(tag);
+    this.refreshNavigation();
+    this.openNavigation();
+  }
+
+  removeFilter(e) {
+    let filterName = e.target.innerHTML;
+    if (this.filter.includes(filterName)) {
+      this.filter = this.filter.filter(el => el !== filterName);
+    } else {
+      console.log("Error!")
+    }
+    this.refreshNavigation();
+    if (!this.filter.length) this.closeNavigation();
   }
 }
 
