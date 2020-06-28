@@ -11,7 +11,6 @@ class App {
     this.navigation = document.createElement("div");
     this.filter = [];
     this.mount();
-
   }
 
   openNavigation() {
@@ -29,24 +28,23 @@ class App {
   }
 
   mount() {
-    let navContent = `
-      <aside>
-        Clear
-      </aside>
-    `
     this.navigation.setAttribute("class", "navigation card card--small")
     this.navigation.setAttribute("id", "navigation");
     let navTags = document.createElement("div");
     navTags.setAttribute("class", "card__tags");
+    let navContent = document.createElement("aside");
+    navContent.innerHTML = "Clear";
+    navContent.addEventListener("click", this.removeFilter.bind(this));
     this.filter.forEach(el => navTags.insertAdjacentElement("beforeend", Tile(el, this.removeFilter.bind(this), true)));
 
     this.mainContent.setAttribute("class", "main-content");
     this.app.appendChild(this.navigation);
     this.app.appendChild(this.mainContent);
     this.navigation.insertAdjacentElement("afterbegin", navTags);
-    this.navigation.insertAdjacentHTML("beforeend", navContent);
+    this.navigation.insertAdjacentElement("beforeend", navContent);
     this.data.map(job => this.mainContent.insertAdjacentElement("beforeend", Card(job, this.addFilter.bind(this))));
   }
+
 
   refreshNavigation() {
     let tags = this.navigation.getElementsByTagName("div")[0];
@@ -66,8 +64,10 @@ class App {
     let filterName = e.target.innerHTML;
     if (this.filter.includes(filterName)) {
       this.filter = this.filter.filter(el => el !== filterName);
+    } else if (filterName == "Clear"){
+      this.filter = [];
     } else {
-      console.log("Error!")
+      console.log("[removeFilter]: Error!");
     }
     this.refreshNavigation();
     if (!this.filter.length) this.closeNavigation();
