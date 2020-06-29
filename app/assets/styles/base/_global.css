@@ -5,7 +5,9 @@ html, body {
 body {
   font-family: "Spartan", Helvetica, sans-serif;
   font-size: 15px;
-  position: relative; 
+  position: relative;
+  min-height: 100vh;
+  background-color: $backgroundColor; 
 }
 
 .attribution {
@@ -24,6 +26,11 @@ body {
   background: $mainColor url("../../../assets/images/bg-header-mobile.svg") no-repeat center;
   background-size: cover;
   height: 150px;
+
+  @mixin atMedium {
+    background: $mainColor url("../../../assets/images/bg-header-desktop.svg") no-repeat center;
+    background-size: cover;
+  }
 }
 
 #root {
@@ -34,4 +41,9 @@ body {
 
 .main-content {
   transition: all 300ms ease-out; 
+}
+
+.container {
+  max-width: 1110px;
+  margin: 0 auto;
 }

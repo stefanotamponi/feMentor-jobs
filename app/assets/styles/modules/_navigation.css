@@ -9,6 +9,8 @@
   opacity: 0;
   left: 10px;
   width: calc(100% - 95px);
+  
+
   & > * {
     opacity: 0;
     transition: all 300ms ease-out;
@@ -24,5 +26,19 @@
       opacity: 1;
     }
 
+  }
+
+  .card__tags {
+    padding-right: 1em;
+    @mixin atMedium {
+      max-width: none;
+    }
+  }
+
+  @mixin atMedium {
+    left: 50%;
+    margin-left: 0;
+    margin-right: 0;
+    transform: translate(-50%, -50%);
   }
 }

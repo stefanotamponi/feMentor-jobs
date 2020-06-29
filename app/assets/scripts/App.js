@@ -30,7 +30,6 @@ class App {
 
   mount() {
     if (document.querySelector(".main-content")) return null //prevent multiple instances
-    console.log("mounted!");
     this.navigation.setAttribute("class", "navigation card card--small")
     this.navigation.setAttribute("id", "navigation");
     let navTags = document.createElement("div");

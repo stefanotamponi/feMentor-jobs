@@ -3,7 +3,6 @@ function jobsFilter(data, filter) {
 
   let updatedData = data.filter(obj => {
     let values = Object.values(obj).flat();
-    
     return values.filter( value => filter.indexOf(value) > -1).length === filter.length;
   })
 

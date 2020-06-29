@@ -25,6 +25,7 @@
       width: 32px;
       border-radius: 0 5px 5px 0;
       transform: translateX(100%);
+      transition: all 300ms ease-out;
     }
 
     &::after {
@@ -35,6 +36,14 @@
       right: -14px;
       transform: translate(50%, -50%) rotate(45deg);
       top: 50%;
+    }
+
+    &:hover {
+      background-color: $backgroundColor;
+      color: $mainColor;
+      &::before {
+        background-color: $veryDarkGrayishCyan;
+      }
     }
   }
 }
