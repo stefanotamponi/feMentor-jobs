@@ -2,6 +2,7 @@ import * as data from '../../../data.json';
 import Card from "./modules/card";
 import "../styles/styles.css";
 import Tile from './modules/tile';
+import jobsFilter from './modules/jobsFilter';
 
 class App {
   constructor() {
@@ -28,6 +29,8 @@ class App {
   }
 
   mount() {
+    if (document.querySelector(".main-content")) return null //prevent multiple instances
+    console.log("mounted!");
     this.navigation.setAttribute("class", "navigation card card--small")
     this.navigation.setAttribute("id", "navigation");
     let navTags = document.createElement("div");
@@ -46,6 +49,12 @@ class App {
   }
 
 
+  refreshCore() {
+    let updatedData = jobsFilter(this.data, this.filter);
+    this.mainContent.innerHTML = "";
+    updatedData.map(job => this.mainContent.insertAdjacentElement("beforeend", Card(job, this.addFilter.bind(this))));
+  }
+
   refreshNavigation() {
     let tags = this.navigation.getElementsByTagName("div")[0];
     tags.innerHTML = "";
@@ -57,6 +66,7 @@ class App {
     const tag = e.target.innerHTML;
     if (!this.filter.includes(tag)) this.filter.push(tag);
     this.refreshNavigation();
+    this.refreshCore();
     this.openNavigation();
   }
 
@@ -70,6 +80,8 @@ class App {
       console.log("[removeFilter]: Error!");
     }
     this.refreshNavigation();
+    this.refreshCore();
+
     if (!this.filter.length) this.closeNavigation();
   }
 }
