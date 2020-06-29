@@ -1,6 +1,7 @@
 import Tile from './tile';
+import Feature from './feature';
 
-const card = (props, tileAction) => {
+const card = (props, action) => {
   let main = document.createElement("div");
   main.setAttribute("class", "card");
   main.innerHTML = `
@@ -8,8 +9,6 @@ const card = (props, tileAction) => {
     <div class="card__main">
       <div class="card__meta-main">
         <small>${props.company}</small>
-        ${props.new ? "<span class='card__features'>New!</span>" : ""}
-        ${props.featured ? "<span class='card__features card__features--featured'>Featured</span>" : ""}
       </div>
       <h3>${props.position}</h3>
       <span class="card__meta">${props.postedAt} • ${props.contract} • ${props.location}</span>
@@ -21,9 +20,22 @@ const card = (props, tileAction) => {
 
   tagSection.setAttribute("class", "card__tags");
   tags.forEach(tag => {
-    tagSection.insertAdjacentElement("beforeend", Tile(tag, tileAction))
+    tagSection.insertAdjacentElement("beforeend", Tile(tag, action))
   });
   main.insertAdjacentElement("beforeend", tagSection);
+  
+  let featureSection = main.querySelector(".card__meta-main"),
+  features = [
+    props.new ? Feature("New", action) : null,
+    props.featured ? Feature("Featured", action, true) : null
+  ]
+  if (features.length) {
+    features.forEach(feature => {
+      if (feature) {
+        featureSection.insertAdjacentElement("beforeend", feature);
+      }
+    })
+  }
 
   return main;
 }

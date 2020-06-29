@@ -3,6 +3,9 @@ function jobsFilter(data, filter) {
 
   let updatedData = data.filter(obj => {
     let values = Object.values(obj).flat();
+    if (obj.new) values.push("New");
+    if (obj.featured) values.push("Featured");
+    
     return values.filter( value => filter.indexOf(value) > -1).length === filter.length;
   })
 

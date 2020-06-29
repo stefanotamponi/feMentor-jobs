@@ -58,6 +58,7 @@
     background-color: $mainColor;
     border-radius: 200px;
     color: #FFF!important;
+    cursor: pointer;
     font-size: .7em;
     font-weight: 700;
     margin-right: 8px;
