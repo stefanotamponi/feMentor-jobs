@@ -19,7 +19,7 @@
     border: none;
     display: flex;
     margin: 20px;
-    padding: 20px;
+    padding: 20px 22.5px;
     justify-content: space-between;
     aside {
       color: $mainColor;
@@ -102,6 +102,11 @@
 
     @mixin atMedium {
       max-width: 40%;
+      justify-content: flex-end;
+      .tile {
+        margin-right: 0;
+        margin-left: 15px;
+      }
     }
   }
 }
