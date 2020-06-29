@@ -1,6 +1,5 @@
 .card {
   background-color: #FFF;
-  border-left: 5px solid $mainColor;
   border-radius: 5px;
   box-shadow: 0 8px 19px -10px rgba($veryDarkGrayishCyan, .55);
   margin-bottom: 40px;
@@ -12,6 +11,10 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
+  }
+
+  &--featured {
+    border-left: 5px solid $mainColor;
   }
 
   &--small {

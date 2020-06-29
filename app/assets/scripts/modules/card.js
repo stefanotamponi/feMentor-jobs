@@ -3,7 +3,13 @@ import Feature from './feature';
 
 const card = (props, action) => {
   let main = document.createElement("div");
-  main.setAttribute("class", "card");
+  
+  if (props.featured) {
+    main.setAttribute("class", "card card--featured");
+  } else {
+    main.setAttribute("class", "card");
+  }
+
   main.innerHTML = `
   <img class="card__image" src="./assets${props.logo.substr(1)}" alt="${props.company} company logo" />
     <div class="card__main">
@@ -15,6 +21,9 @@ const card = (props, action) => {
     </div>
     <hr />
   `
+
+  
+
   let tagSection = document.createElement("div"),
   tags = [props.role, props.level, ...props.languages, ...props.tools]
   tagSection.setAttribute("class", "card__tags");
