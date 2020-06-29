@@ -5,7 +5,7 @@ const card = (props, action) => {
   let main = document.createElement("div");
   main.setAttribute("class", "card");
   main.innerHTML = `
-  <img class="card__image" src="./assets${props.logo.substr(1)}" />
+  <img class="card__image" src="./assets${props.logo.substr(1)}" alt="${props.company} company logo" />
     <div class="card__main">
       <div class="card__meta-main">
         <small>${props.company}</small>
