@@ -10,9 +10,11 @@
   <style>
     .attribution { font-size: 11px; text-align: center; }
     .attribution a { color: hsl(228, 45%, 44%); }
+    .loading-screen{background-color:#5ba4a4;height:100%;width:100%;position:fixed;top:0;left:0;z-index:99;display:flex;opacity:1;align-items:center;justify-content:center;transition:opacity .5s ease-out}.loading-screen--fade{opacity:0}.loading-screen--fade div,.loading-screen--fade div:after{animation:none}.loading-screen div{animation:rotate 1.5s linear infinite;border-color:transparent #effafa #effafa transparent;border-width:15px;display:block;transition:all .5s ease-out,border 0s,border-radius 0s;z-index:100}.loading-screen div,.loading-screen div:after{border-style:solid;border-radius:50%;height:100px;left:50%;position:fixed;top:50%;width:100px}.loading-screen div:after{animation:rotate 1.7s ease-in-out infinite;border-color:#fff transparent transparent #fff;border-width:3px;content:""}@keyframes rotate{0%{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(1turn)}}
   </style>
 </head>
 <body>
+  <div class="loading-screen" id="loading-screen"><div></div></div>
   <div class="hero"></div>
   <div id="root" class="container"></div>
   <div class="attribution">

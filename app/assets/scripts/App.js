@@ -14,6 +14,17 @@ class App {
     this.mount();
   }
 
+  finishLoading() {
+    let modal = document.getElementById("loading-screen");
+    
+    setTimeout(() => {
+      modal.classList.add("loading-screen--fade");
+      setTimeout(() => {
+        document.body.removeChild(modal);
+      }, 500)
+    }, 1000)
+  }
+
   openNavigation() {
     if (!this.navigation.classList.contains("navigation--visible")) {
       this.navigation.classList.add("navigation--visible");
@@ -45,8 +56,8 @@ class App {
     this.navigation.insertAdjacentElement("afterbegin", navTags);
     this.navigation.insertAdjacentElement("beforeend", navContent);
     this.data.map(job => this.mainContent.insertAdjacentElement("beforeend", Card(job, this.addFilter.bind(this))));
+    this.finishLoading();
   }
-
 
   refreshCore() {
     let updatedData = jobsFilter(this.data, this.filter);
