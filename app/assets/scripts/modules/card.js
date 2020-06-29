@@ -17,7 +17,6 @@ const card = (props, action) => {
   `
   let tagSection = document.createElement("div"),
   tags = [props.role, props.level, ...props.languages, ...props.tools]
-
   tagSection.setAttribute("class", "card__tags");
   tags.forEach(tag => {
     tagSection.insertAdjacentElement("beforeend", Tile(tag, action))
@@ -28,7 +27,8 @@ const card = (props, action) => {
   features = [
     props.new ? Feature("New", action) : null,
     props.featured ? Feature("Featured", action, true) : null
-  ]
+  ];
+
   if (features.length) {
     features.forEach(feature => {
       if (feature) {
